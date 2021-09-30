@@ -321,6 +321,17 @@ export class Queue {
    *
    * @param job {object} - Job realm model object
    */
+   
+  removeJob(job){
+   this.realm.write(() => {
+    try{
+      this.realm.delete(job);
+    }catch(err){
+      console.log('cant delete job. Error: ', err)
+    }
+    }); 
+  }
+  
   async processJob(job) {
 
     // Data must be cloned off the realm job object for several lifecycle callbacks to work correctly.
